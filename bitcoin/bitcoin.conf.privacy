@@ -71,7 +71,7 @@ dns=0
 # Query for peer addresses via DNS lookup, if low on addresses.
 dnsseed=0
 # Accept incoming connections from peers.
-listen=0
+listen=1
 # Use separate SOCKS5 proxy <ip:port> to reach peers via Tor hidden services.
 onion=127.0.0.1:9050
 # Only connect to peers via Tor.
@@ -79,6 +79,11 @@ onlynet=onion
 # Connect through <ip:port> SOCKS5 proxy.
 proxy=127.0.0.1:9050
 
+# [core]
+# Only download and relay blocks - ignore unconfirmed transaction
+blocksonly=1
+# Set database cache size in megabytes; machines sync faster with a larger cache. Recommend setting as high as possible based upon machine's available RAM.
+dbcache=600
 
 # [Sections]
 # Most options automatically apply to mainnet, testnet, and regtest networks.
