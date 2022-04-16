@@ -24,7 +24,7 @@ SOCKSPort 9050 # Default: Bind to localhost:9050 for local connections.
 ## all (and only) requests that reach a SOCKSPort. Untrusted users who
 ## can access your SOCKSPort may be able to learn about the connections
 ## you make.
-SOCKSPolicy accept 192.168.0.0/16
+SOCKSPolicy accept 192.168.1.0/24
 #SOCKSPolicy accept6 FC00::/7
 #SOCKSPolicy reject *
 
@@ -52,6 +52,7 @@ Log notice syslog
 ## The directory for keeping all the keys/etc. By default, we store
 ## things in $HOME/.tor on Unix, and in Application Data\tor on Windows.
 DataDirectory /var/lib/tor
+DataDirectoryGroupReadable 1
 
 ## The port on which Tor will listen for local connections from Tor
 ## controller applications, as documented in control-spec.txt.
