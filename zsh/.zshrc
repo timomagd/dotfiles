@@ -39,10 +39,7 @@ alias \
 	clip='xclip -sel clip <'\
 	..='cd ..'\
 	grep='grep --color=auto'\
-	irssi='irssi --home=~/.config/irssi --config=~/.config/irssi/config'\
-	ansible-latest='source /home/timothy/Projects/Python/VirtEnv/ansible-latest/bin/activate'\
-	ansible-210='source /home/timothy/Projects/Python/VirtEnv/ansible-2.10/bin/activate'
 
-fpath=(/home/timothy/.config/zsh/completion $fpath)
+fpath=(/home/$USER/.config/zsh/completion $fpath)
 # Load syntax highlighting: this should be last
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
