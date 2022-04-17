@@ -3,9 +3,17 @@
 # This config should be placed in following path:
 # ~/.bitcoin/bitcoin.conf
 
+# [core]
+# Set database cache size in megabytes; machines sync faster with a larger cache. Recommend setting as high as possible based upon machine's available RAM.
+dbcache=100
+# Keep at most <n> unconnectable transactions in memory.
+maxorphantx=10
+# Keep the transaction memory pool below <n> megabytes.
+maxmempool=50
+
 # [network]
 # Add a node IP address to connect to and attempt to keep the connection open. This option can be set multiple times.
-addnode=h2vlpudzphzqxutd.onion
+#addnode=h2vlpudzphzqxutd.onion
 # Bind to given address and always listen on it. (default: 0.0.0.0). Use [host]:port notation for IPv6. Append =onion to tag any incoming connections to that address and port as incoming Tor connections
 bind=127.0.0.1:8333
 # Allow DNS lookups for -addnode, -seednode and -connect values.
@@ -13,9 +21,9 @@ dns=0
 # Query for peer addresses via DNS lookup, if low on addresses.
 dnsseed=0
 # Specify your own public IP address.
-externalip=your_tor_address.onion
+#externalip=your_tor_address.onion
 # Accept incoming connections from peers.
-listen=0
+listen=1
 # Use separate SOCKS5 proxy <ip:port> to reach peers via Tor hidden services.
 onion=127.0.0.1:9050
 # Only connect to peers via Tor.
