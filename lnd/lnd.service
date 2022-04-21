@@ -10,7 +10,7 @@ After=bitcoind.service
 
 # Service execution
 ###################
-ExecStart=/usr/local/bin/lnd
+ExecStart=/usr/local/bin/lnd --configfile=/etc/lnd/lnd.conf
 
 # Process management
 ####################
