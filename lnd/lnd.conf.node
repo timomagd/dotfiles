@@ -150,7 +150,7 @@ tor.v3=true
 # Enable Tor stream isolation by randomizing user credentials for each
 # connection. With this mode active, each connection will use a new circuit.
 # This means that multiple applications (other than lnd) using Tor won't be mixed
- in with lnd's traffic.
+# in with lnd's traffic.
 #
 # This option may not be used while direct connections are enabled, since direct
 # connections compromise source IP privacy by default.
