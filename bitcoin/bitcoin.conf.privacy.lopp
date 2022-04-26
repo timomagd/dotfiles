@@ -32,6 +32,10 @@ onlynet=onion
 proxy=127.0.0.1:9050
 # Connect to a node (IP address) to retrieve peer addresses, then disconnect.
 seednode=hhiv5pnxenvbf4am.onion
+# Maintain at most N connections to peers.
+maxconnections=40
+# Tries to keep outbound traffic under the given target (in MiB per 24h), 0 = no limit.
+maxuploadtarget=5000
 
 
 # [Sections]
