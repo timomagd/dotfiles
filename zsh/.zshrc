@@ -39,6 +39,7 @@ alias \
 	clip='xclip -sel clip <'\
 	..='cd ..'\
 	grep='grep --color=auto'\
+	bitcoin-cli='bitcoin-cli -rpccookiefile=/var/lib/bitcoind/.cookie'\
 
 fpath=(/home/$USER/.config/zsh/completion $fpath)
 # Load syntax highlighting: this should be last
