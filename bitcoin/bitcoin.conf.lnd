@@ -28,17 +28,19 @@ server=1
 #
 # The config option `rpcauth` can be added to server startup argument. It is set at initialization time
 # using the output from the script in share/rpcauth/rpcauth.py after providing a username:
-rpcauth=nodeuser:000f36895808f4499f2f472164a29bd9$e7d0ed7b65206a2b6211d463af0b4d942f064b3eac72bbd3035bdf45f24fda7a
+rpcauth=NodeUser:69fbb5e4b2987819c141bcedd1ab4cdeb79866282c3ebe05521abe48cb48ae7e53bee9786608cb5066c02baebc
 
 # On client-side, you add the normal user/password pair to send commands:
-rpcuser=nodeuser
-rpcpassword=nodepassword
+rpcuser=NodeUser
+rpcpassword=~supersecretepassword!
 
 # [zeromq]
 # Enable publishing of transaction hashes to <address>.
 zmqpubhashtx=tcp://127.0.0.1:28333
 # Enable publishing of raw block hex to <address>.
 zmqpubrawblock=tcp://127.0.0.1:28332
+
+zmqpubrawtx=tcp://127.0.0.1:28331
 
 # [Sections]
 # Most options automatically apply to mainnet, testnet, and regtest networks.
