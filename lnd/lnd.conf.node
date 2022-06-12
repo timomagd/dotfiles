@@ -1,157 +1,58 @@
-# LND configuration
-# /etc/lnd/lnd.conf
+# RaspiBolt: lnd configuration
+# /data/lnd/lnd.conf
 
 [Application Options]
-# The alias your node will use, which can be up to 32 UTF-8 characters in
-# length.
 alias=YOUR_FANCY_ALIAS
-
-# Debug logging level.
-# Valid levels are {trace, debug, info, warn, error, critical}
-# You may also specify <global-level>,<subsystem>=<level>,<subsystem2>=<level>,... 
-# to set log level for individual subsystems. Use lncli debuglevel --show to 
-# list available subsystems.
 debuglevel=info
-
-# The maximum number of incoming pending channels permitted per peer.
 maxpendingchannels=5
-
-# Specify the interfaces to listen on for p2p connections. One listen
-# address per line.
 listen=localhost
+datadir=/var/lib/lnd
+logdir=/var/lib/lnd
 
 # Password: automatically unlock wallet with the password in this file
 # -- comment out to manually unlock wallet, and see RaspiBolt guide for more secure options
-# The full path to a file (or pipe/device) that contains the password for
-# unlocking the wallet; if set, no unlocking through RPC is possible and lnd
-# will exit if no wallet exists or the password is incorrect; if
-# wallet-unlock-allow-create is also set then lnd will ignore this flag if no
-# wallet exists and allow a wallet to be created through RPC.
-wallet-unlock-password-file=/data/lnd/password.txt
-
-# Don't fail with an error if wallet-unlock-password-file is set but no wallet
-# exists yet. Not recommended for auto-provisioned or high-security systems
-# because the wallet creation RPC is unauthenticated and an attacker could
-# inject a seed while lnd is in that state.
-wallet-unlock-allow-create=true
+#wallet-unlock-password-file=/data/lnd/password.txt
+#wallet-unlock-allow-create=true
 
 # Channel settings
-# The base fee in millisatoshi we will charge for forwarding payments on our
-# channels.
 bitcoin.basefee=1000
-
-# The fee rate used when forwarding payments on our channels. The total fee
-# charged is basefee + (amount * feerate / 1000000), where amount is the
-# forwarded amount.
 bitcoin.feerate=1
-
-# The smallest channel size (in satoshis) that we should accept. Incoming
-# channels smaller than this will be rejected, default value 20000.
 minchansize=100000
-
-# If true, spontaneous payments through keysend will be accepted.
-# This is a temporary solution until AMP is implemented which is expected to be soon.
-# This option will then become deprecated in favor of AMP.
 accept-keysend=true
-
-# If true, spontaneous payments through AMP will be accepted. Payments to AMP
-# invoices will be accepted regardless of this setting.
 accept-amp=true
-
-[Protocol]
-# If set, then lnd will create and accept requests for channels larger than 0.16
-# BTC
 protocol.wumbo-channels=true
-
-# Set to disable support for anchor commitments. If not set, lnd will use anchor
-# channels by default if the remote channel party supports them. Note that lnd
-# will require 1 UTXO to be reserved for this channel type if it is enabled.
-# (Deprecates the previous "protocol.anchors" setting.)
 protocol.no-anchors=false
-
-# The target number of blocks in which a cooperative close initiated by a remote
-# peer should be confirmed. This target is used to estimate the starting fee
-# rate that will be used during fee negotiation with the peer. This target is
-# is also used for cooperative closes initiated locally if the --conf_target
-# for the channel closure is not set.
 coop-close-target-confs=24
 
-[Watchtower]
-# Activate Watchtower Client. To get more information or configure watchtowers
-# run `lncli wtclient -h`.
+# Watchtower
 wtclient.active=true
 
-[Performance]
-# If true, we'll attempt to garbage collect canceled invoices upon start.
+# Performance
 gc-canceled-invoices-on-startup=true
 gc-canceled-invoices-on-the-fly=true
-
-# If true, will not reply with historical data that matches the range specified
-# by a remote peer's gossip_timestamp_filter. Doing so will result in lower
-# memory and bandwidth requirements.
 ignore-historical-gossip-filters=1
-
-# Enable free list syncing for the default bbolt database. This will decrease
-# start up time, but can result in performance degradation for very large
-# databases, and also result in higher memory usage. If "free list corruption"
-# is detected, then this flag may resolve things.
 sync-freelist=true
-
-# If true, will apply a randomized staggering between 0s and 30s when
-# reconnecting to persistent peers on startup. The first 10 reconnections will be
-# attempted instantly, regardless of the flag's value
 stagger-initial-reconnect=true
-
-[Routing]
-# If set to true, then we'll prune a channel if only a single edge is seen as
-# being stale. This results in a more compact channel graph, and also is helpful
-# for neutrino nodes as it means they'll only maintain edges where both nodes are
-# seen as being live from it's PoV.
 routing.strictgraphpruning=true
 
 # Database
 [bolt]
-# Whether the databases used within lnd should automatically be compacted on
-# every startup (and if the database has the configured minimum age). This is
-# disabled by default because it requires additional disk space to be available
-# during the compaction that is freed afterwards. In general compaction leads to
-# smaller database files.
 db.bolt.auto-compact=true
-
-# How long ago the last compaction of a database file must be for it to be
-# considered for auto compaction again. Can be set to 0 to compact on every
-# startup. (default: 168h)
 db.bolt.auto-compact-min-age=168h
 
 [Bitcoin]
-# If the Bitcoin chain should be active. Atm, only a single chain can be active.
 bitcoin.active=1
-
-# Use Bitcoin's main network.
 bitcoin.mainnet=1
-
-# Use the bitcoind back-end
 bitcoin.node=bitcoind
 
 [Bitcoind]
-# The base directory that contains the node's data, logs, configuration file,
 bitcoind.dir=/var/lib/bitcoind
-
-# Fee estimate mode for bitcoind. It must be either "ECONOMICAL" or "CONSERVATIVE".
-bitcoind.estimatemode=CONSERVATIVE
+#bitcoind.zmqpubrawblock=tcp://127.0.0.1:28332
+#bitcoind.zmqpubrawtx=tcp://127.0.0.1:28333
 
 [tor]
-# Allow outbound and inbound connections to be routed through Tor
 tor.active=true
-
-# Automatically set up a v3 onion service to listen for inbound connections
 tor.v3=true
-
-# Enable Tor stream isolation by randomizing user credentials for each
-# connection. With this mode active, each connection will use a new circuit.
-# This means that multiple applications (other than lnd) using Tor won't be mixed
-# in with lnd's traffic.
-#
-# This option may not be used while direct connections are enabled, since direct
-# connections compromise source IP privacy by default.
 tor.streamisolation=true
+
+
